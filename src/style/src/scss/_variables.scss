@@ -1,0 +1,142 @@
+// ЦВЕТА И ФОН (getyourguide)
+
+// чёрно-белый
+$white: #fff;
+$black: #1a2b49; // текст в статьях, заголовки (h1, h2, h3) в модалках, текст рядом с игровым полем
+
+// лого
+$color-one: #ff2400; // цвет лого (алый)
+
+// серый
+$color-twenty-four: #31343d;
+$color-twenty-five: #63687a; // ссылки на сайты, языки, ссылки в футере, close
+$color-two: #63687a; // (дубль цвета) обычный текст в nav__content-info ([-] #6d7688)
+$color-twenty-six: #858995;
+$color-three: #bfc7cf; // players/users online
+$color-four: #c6c8d0; // [-]
+$color-twenty-three: #dcdfe4; // border header & footer
+$color-five: #e8e9ec; // [-]
+$color-twenty-seven: #ebeef1; // [-]
+$color-six: #f3f4f5; // [-] светлый серый для бекграунда, таблица player.zone
+
+// отдельно для ссылок
+$color-nine: #63687a; // #0071eb (из палитры) цвет ссылки и кнопок, ex #4fba69 & #5f60d2 (вне палитры)
+$color-twenty-two: #63687a; // подчеркивание у ссылок, ex #8149f8 (вне палитры)
+
+// жёлтый
+$color-forty-two: #a65200; // label-warning
+$color-eight: #925a49; // badge-brown
+$color-twenty: #ed5f40; // badge-dark-orange
+$color-thirty-two: #f53; // guiding-red
+$color-eleven: #ff8e42; // badge-orange
+$color-twenty-eight: #f7c744; // badge-yellow
+$color-ten: #ffd938; // basking-yellow
+$color-seven: #fff5f1; // [-] бежевый (бледный)
+
+// зелёный
+$color-forty: #255a60; // badge-teal, зелёный (тёмный)
+$color-thirty: #007850; // label-success
+$color-twelve: #00ca6d; // [-] зелёный (светлый)
+$color-twenty-nine: #5dc679; // badge-green
+$color-twenty-one: #a1d55d; // plant-green
+$color-forty-one: #d1f6e2; // success-weak, зелёный (бледный)
+
+// красный
+$color-seventeen: #951d2b; // critical-hovered
+$color-fourteen: #c72a3d; // красный
+$color-thirty-four: #ff7083; // badge-pink
+$color-thirty-three: #f4cdd7; // flamingo-pink
+$color-thirty-one: #ffe9e3; // surface-warning
+$color-fifteen: #ffe8ed; // розовый (светлый)
+
+// синий
+$color-thirty-nine: #391f5b; // badge-purple, фиолетовый
+$color-thirty-eight: #1e2c48; // badge-dark-blue, очень тёмный синий
+$color-forty-four: #1e335a; // tertiary-hovered
+$color-thirty-six: #304c84; // primary-hovered, синий (тёмный) (в getyourguide для :hover кнопок)
+$color-thirty-five: #0071eb; // цвет как у ссылок
+$color-sixteen: #1593ff; // badge-blue, голубой (тёмный)
+$color-eighteen: #81beff; // tertiary-disabled, голубой (светлый)
+$color-forty-three: #c7e2ff; // secondary-hovered
+$color-nineteen: #e1f0ff; // interactive-secondary, голубой (бледный)
+
+
+// ДРУГОЕ
+
+$border-radius: 1rem; // у выпадающего меню, модальных окон и картинок
+$background: rgba(#000,.5); // затемнение для .options и модальных окон
+$box-shadow: 0 0 18px rgba(#000,.2); // у выпадающих списков и модальных окон
+$box-shadow-two: 0 3px 9px rgba(#000,.5); // у options & cookie
+$box-shadow-header: 0 2px 2px #e0e3eb; // у шапки
+$box-shadow-footer: 0 -2px 2px #e0e3eb; // у футера
+$border-header: 1px solid #dcdfe4; // у шапки
+$border-footer: 1px solid #dcdfe4; // у футера
+
+
+// НОЧНАЯ ТЕМА
+
+// цвета
+$dark-color-one: #bfc7cf; // цвет ссылок #56adff
+$dark-color-two: #bfc7cf; // для текста и заголовков
+$dark-color-three: #bfc7cf; // ссылки в header & footer
+$dark-color-four: #000; // [-]
+$dark-color-five: #191b20; // main background
+$dark-color-six: #bfc7cf; // обычный текст в nav__content-info
+$dark-color-seven: #000; // линия на player.zone
+
+// другое
+$dark-background: rgba(#000,.5);
+$dark-box-shadow: 0 0 18px rgba(#000,.4);
+$dark-box-shadow-two: 0 3px 9px rgba(#000,.5);
+$dark-box-shadow-header: 0 2px 2px rgba(#000,.7); // у шапки
+$dark-box-shadow-footer: 0 -2px 2px rgba(#000,.7); // у футера
+$dark-border-header: 1px solid #000;
+$dark-border-footer: 1px solid #000;
+
+
+// СТИЛИ ДЛЯ ИГР ???
+
+$game-white: #fff; // белый
+$game-black: #1a2b49; // чёрный, mines (8, мина на которой взорвался)
+
+$game-color-one: #ff2400; // цвет лого
+$game-color-two: #6d7688; //
+$game-color-three: #b1b6bf; // сетка сапёра
+$game-color-four: #c6c8d0; // connectfour (цвет border), mines (ошибочная мина-крестик)
+$game-color-five: #e8e9ec; // mines (нижний фон поля, крестик мимо)
+$game-color-six: #f3f4f8; // connectfour (верхний слой игрового поля)
+
+$game-color-eight: #985545; // коричневый, mines (5)
+$game-color-nine: #1593ff; // цвет ссылки, mines (1)
+$game-color-twenty-two: #0079e1; // цвет ссылки :hover, mines (6)
+$game-color-ten: #ffd938; // жёлтый, connectfour (желтый диск)
+$game-color-twenty: #fbffd7; // жёлтый (бледный)
+$game-color-eleven: #ff8c41; // оранжевый, mines (4, знак вопроса, мигающая мина)
+$game-color-seven: #fff5f1; // бежевый (бледный)
+$game-color-seventeen: #025b61; // зелёный (тёмный), mines (7)
+$game-color-twelve: #00ca6d; // зелёный (светлый), mines (2, мина обезвреженная)
+$game-color-twenty-one: #00aa71; // салатовый
+$game-color-thirteen: #d7ffdc; // зелёный (бледный)
+$game-color-fourteen: #ff475e; // красный, connectfour (красный диск), mines (3, мина)
+$game-color-fifteen: #ffe5ee; // розовый (светлый)
+$game-color-sixteen: #1593ff; // голубой (тёмный)
+$game-color-eighteen: #81beff; // голубой (светлый)
+$game-color-nineteen: #ccecff; // голубой (бледный)
+$game-color-twenty: #858995; // цвет цифр mines
+
+$game-border-radius: .75rem; //
+$game-border-radius-large: 3rem; // для кнопок
+$game-background: rgba(#ccecff, .55); //
+
+
+// НОЧНЫЕ СТИЛИ ДЛЯ ИГР ???
+
+$game-dark-white: #fff; // белый ===
+$game-dark-black: #000; // чёрный ===
+
+$game-dark-color-one: #31343d; // для фона игрового поля ===
+$game-dark-color-two: #494d58; // разделительная линия для игрового поля ===
+$game-dark-color-three: #63687a; // ===
+$game-dark-color-four: #a0a8b6; // ===
+$game-dark-color-five: #dcdfe4; // ===
+$game-dark-color-six: #bfc7cf; // ===

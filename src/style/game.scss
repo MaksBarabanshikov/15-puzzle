@@ -1,0 +1,194 @@
+@import './src/scss/variables';
+
+$grid_cell_background_color: rgba(217, 213, 210, 0.35);
+$grid_cell_border: #ccc;
+$grid_cell_size: calc(135px - (var(--grid-size) * 7px)); // change size grid cell
+
+:root {
+  --grid-size:4;
+}
+
+$max_grid_size: 8;
+
+@import 'tools';
+@import 'keyframes';
+@import 'base';
+@import 'score';
+@import 'grid';
+@import 'tile';
+
+.game__container {
+  position: relative;
+  //background: #bbada0;
+  //border-radius: $border-radius;
+  //padding: 7px;
+}
+
+.game__message {
+  display: none;
+}
+
+.game__tiles {
+  &.game__tiles_movable {
+    padding: 0;
+    position: absolute;
+    left: 7px;
+    top: 7px;
+  }
+
+  &-row {
+    display: flex;
+  }
+}
+
+.game__tile {
+  padding: 7px;
+
+  &-main {
+    width: 107px;
+    height: 107px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 55px;
+  }
+
+  &:not(.game__tile_movable) {
+    .game__tile-main {
+      background: rgba(238, 228, 218, 0.35);
+    }
+  }
+}
+
+.game__tile.game__tile_movable {
+  position: absolute;
+
+  &.game__tile_2 .game__tile-main {
+    background: #eee4da;
+  }
+
+  &.game__tile_4 .game__tile-main {
+    background: #ede0c8;
+  }
+
+  &.game__tile_8 .game__tile-main {
+    color: #f9f6f2;
+    background: #f2b179;
+  }
+
+  &.game__tile_16 .game__tile-main {
+    color: #f9f6f2;
+    background: #f59563;
+  }
+
+  &.game__tile_32 .game__tile-main {
+    color: #f9f6f2;
+    background: #f67c5f;
+  }
+
+  &.game__tile_64 .game__tile-main {
+    color: #f9f6f2;
+    background: #f65e3b;
+  }
+
+  &.game__tile_128 .game__tile-main {
+    color: #f9f6f2;
+    background: #edcf72;
+    font-size: 45px;
+  }
+
+  &.game__tile_256 .game__tile-main {
+    color: #f9f6f2;
+    background: #edcc61;
+    font-size: 45px;
+  }
+
+  &.game__tile_512 .game__tile-main {
+    color: #f9f6f2;
+    background: #edc850;
+    font-size: 45px;
+  }
+
+  &.game__tile_1024 .game__tile-main {
+    color: #f9f6f2;
+    background: #edc53f;
+    font-size: 35px;
+  }
+
+  &.game__tile_2048 .game__tile-main {
+    color: #f9f6f2;
+    background: #edc22e;
+    font-size: 35px;
+  }
+
+  &.game__tile_4096 .game__tile-main {
+    color: #f9f6f2;
+    background: #FFDC00;
+    font-size: 35px;
+  }
+
+  &.game__tile_8192 .game__tile-main {
+    color: #f9f6f2;
+    background: #FF851B;
+    font-size: 35px;
+  }
+
+  &.game__tile_16384 .game__tile-main {
+    color: #f9f6f2;
+    background: #FF4136;
+    font-size: 30px;
+  }
+
+  &.game__tile_32769 .game__tile-main {
+    color: #f9f6f2;
+    background: #85144b;
+    font-size: 30px;
+  }
+}
+
+.game__tile.game__tile_movable {
+  transition: transform 100ms ease-in-out;
+
+  @for $i from 0 through 3 {
+    @for $j from 0 through 3 {
+      &.game__tile_position_#{$i+1}_#{$j+1} {
+        transform: translate($i * 121px, $j * 121px);
+      }
+    }
+  }
+}
+
+.game__tiles.game__tile_movable.game__tiles_thumb {
+  .game__tile-main {
+    font-size: 0;
+    color: transparent;
+  }
+
+  &.game__tile_2 .game__tile-main {}
+
+  &.game__tile_4 .game__tile-main {}
+
+  &.game__tile_8 .game__tile-main {}
+
+  &.game__tile_16 .game__tile-main {}
+
+  &.game__tile_32 .game__tile-main {}
+
+  &.game__tile_64 .game__tile-main {}
+
+  &.game__tile_128 .game__tile-main {}
+
+  &.game__tile_256 .game__tile-main {}
+
+  &.game__tile_512 .game__tile-main {}
+
+  &.game__tile_1024 .game__tile-main {}
+
+  &.game__tile_2048 .game__tile-main {}
+}
+
+.current-score {
+  position: relative;
+}

@@ -1,0 +1,51 @@
+{
+  "name": "15-puzzle",
+  "version": "1.0.0",
+  "description": "15-puzzle ts ",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack serve --mode=development --progress",
+    "build": "webpack",
+    "build:prod": "webpack --config webpack.config.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaksBarabanshikov/15-puzzle.git"
+  },
+  "author": "Maksim Barabanshikov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaksBarabanshikov/15-puzzle/issues"
+  },
+  "homepage": "https://github.com/MaksBarabanshikov/15-puzzle#readme",
+  "devDependencies": {
+    "@types/node": "^18.7.15",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "cssnano": "^5.1.13",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "node-sass": "^7.0.1",
+    "postcss": "^8.4.16",
+    "postcss-cssnext": "^3.1.1",
+    "postcss-import": "^15.0.0",
+    "postcss-loader": "^7.0.1",
+    "prettier": "^2.7.1",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "sugarss": "^4.0.1",
+    "ts-loader": "^9.3.1",
+    "tsconfig-paths-webpack-plugin": "^4.0.0",
+    "tslint": "^6.1.3",
+    "tslint-loader": "^3.5.4",
+    "typescript": "^4.8.2",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.10.1",
+    "webpack-merge": "^5.8.0"
+  }
+}
