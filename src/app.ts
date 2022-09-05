@@ -1,17 +1,23 @@
 import "./style/game.css"
-import { drawTiles } from "./helper";
+import { draw, getMatrix } from "./helper";
+import { setPositionItems } from "./position";
 
 const size: number = 4
 
 const fieldSize: number = Math.pow(size, 2)
 
-const fieldArray: Array<number> = [...Array(fieldSize).keys()]
+const fieldArray: number[] = [...Array(fieldSize).keys()]
 
-const gameField = document.getElementById("15-puzzle")
+const shuffleFieldArray: number[] = fieldArray.sort(() => Math.random() - .5).concat(100)
 
-const tileContainer = document.querySelector(".tiles")
+// const gameField = document.getElementById("15-puzzle")
 
-drawTiles(fieldArray)
+const tileContainer: Element = document.querySelector(".tiles")!
 
-const tileArray = Array.from(gameField!.querySelectorAll(".tile"))
+draw(fieldArray, tileContainer)
 
+const tileArray: HTMLElement[] = Array.from(tileContainer!.querySelectorAll(".tile"))
+
+const matrix = getMatrix(shuffleFieldArray, size)
+
+setPositionItems(matrix, tileArray);

@@ -1,9 +1,17 @@
-export const drawTiles = (arr: Array<number>) => {
-    arr.map(tile => createTile(tile.toString()))
+export const draw = (arr: Array<number>, parent: Element) => arr.map(tile => createHTML(tile.toString(), parent))
+
+export const createHTML = (text: string, parent: Element) => {
+    if (text !== "0") {
+        const tile = document.createElement('div');
+        tile.className = 'tile';
+        tile.innerText = text;
+        return parent.appendChild(tile);
+    }
+    return;
 }
 
-export const createTile = (text: string) => {
-    const tile = document.createElement('div');
-    tile.className = 'tile';
-    return tile.innerText = text
+export const getMatrix = (arr: number[], size: number) => {
+    const matrix: Array<any> = []
+    arr.map(() => matrix.push(arr.splice(0, size)))
+    return matrix;
 }
