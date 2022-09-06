@@ -1,4 +1,4 @@
-export const setPositionItems = (matrix: Array<number[]>, arr: HTMLElement[]) => {
+export const setPositionItems = (matrix: any, arr: HTMLElement[]) => {
   for( let y = 0; y < matrix.length; y++) {
     for( let x = 0; x < matrix.length; x++) {
       const value = matrix[y][x];

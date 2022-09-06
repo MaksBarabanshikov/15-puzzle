@@ -14,7 +14,8 @@
     "quotemark": [
       true,
       "single"
-    ]
+    ],
+    "no-shadowed-variable": false
   },
   "rulesDirectory": []
 }
