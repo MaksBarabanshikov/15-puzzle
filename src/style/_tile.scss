@@ -13,6 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   //top: 50%;
   //left: 50%;
@@ -20,7 +21,7 @@
   font-size: calc(16rem / var(--grid-size));
 
   &_empty {
-    background-color: rgba(0, 0, 0, 0.11) !important;
+    display: none;
   }
 
   &_correct {
