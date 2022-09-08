@@ -1,5 +1,8 @@
+import {IField, IMatrix} from './initial';
+
 export interface IgenerateField  {
-    fieldArr: any,
-    grid: HTMLElement | Element,
-    tiles: HTMLElement | Element
+    field: IField,
+    gridContainer: HTMLElement | Element,
+    tileContainer: HTMLElement | Element,
+    matrix: IMatrix
 }

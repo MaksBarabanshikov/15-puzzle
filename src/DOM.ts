@@ -1,5 +1,4 @@
 import { IgenerateField } from './types/IProps';
-import { matrix } from './store';
 
 const createGridRow = (gridRow: number[], parent: Element) => {
     const gridRowDOM: HTMLElement = document.createElement('div');
@@ -14,29 +13,22 @@ const createGridCell = (parent: Element) => {
     return parent.appendChild(gridCellDom)
 }
 
-export const generateGame = ({ fieldArr, grid, tiles }: IgenerateField) => {
-    createHTML(grid)
-    fieldArr.map((innerText : number, index : number) => {
-        createHTML(tiles, innerText.toString(), String(index));
-    });
+export const generateGame = ({ field, gridContainer, tileContainer, matrix }: IgenerateField) => {
+    generateGridField(matrix, gridContainer);
+    field.map((innerText : number, index : number) => generateTileField(tileContainer, innerText.toString(), String(index)));
 }
 
-export const createHTML = (parent: Element, innerText?: string, index?: string): any => {
-    if (!innerText) {
-      return generateGridField(matrix, parent)
-    }
-    if (index) {
-        const tile = document.createElement('div');
-        tile.className = 'tile';
-        tile.dataset.matrixId = index;
-        tile.innerText = innerText;
-        if (innerText === '0') {
-            tile.style.display = 'none';
-        }
-        parent.appendChild(tile);
-    }
-}
-
-export const generateGridField = (matrix: number[][], parent: Element) => {
+const generateGridField = (matrix: number[][], parent: Element) => {
     return matrix.map((gridRow: number[]) => createGridRow(gridRow, parent));
+}
+
+const generateTileField = (parent: Element, innerText: string, index: string) => {
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    tile.dataset.matrixId = index;
+    tile.innerText = innerText;
+    if (innerText === '0') {
+        tile.style.opacity = '0';
+    }
+    parent.appendChild(tile);
 }

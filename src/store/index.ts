@@ -1,24 +1,25 @@
 import {matrixStorage, sizeStorage} from '../localStorage';
-import { getMatrix } from '../helper';
+import {IField, IMatrix, ISize} from '../types/initial';
+import {getMatrix} from '../helper';
 
 interface IFifteen {
-    size: number,
-    fieldArr: number[],
-    shuffleFieldArr: number[],
-    matrix: number[][],
+    size: ISize,
+    initialField: IField,
+    field: IField,
+    matrix: IMatrix
 }
 
-const defaultSize = sizeStorage ? Number(sizeStorage) : 4;
-const fieldSize: number = Math.pow(defaultSize, 2)
-const defaultFieldArr = () => [...Array(fieldSize).keys()]
-const defaultShuffleFieldArr = defaultFieldArr().sort(() => Math.random() - .5)
-const defaultMatrix = matrixStorage ? JSON.parse(matrixStorage) : getMatrix(defaultShuffleFieldArr, defaultSize)
-
+const _size = sizeStorage ? Number(sizeStorage) : 4;
+const _fieldSize: number = Math.pow(_size, 2);
+const _initialField = [...Array(_fieldSize).keys()];
+const _field = [..._initialField.sort(() => Math.random() - .5)];
+const _matrix = matrixStorage ? JSON.parse(matrixStorage) : getMatrix([..._field], _size);
+console.log(_matrix)
 const fifteen: IFifteen = {
-    size: defaultSize,
-    fieldArr: defaultFieldArr(),
-    shuffleFieldArr: defaultShuffleFieldArr,
-    matrix: defaultMatrix
+    size: _size,
+    initialField: _initialField,
+    field: _field,
+    matrix: _matrix
 }
 
-export const {size, fieldArr, shuffleFieldArr, matrix} = fifteen
+export const { size, initialField, field, matrix } = fifteen
