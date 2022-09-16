@@ -15,17 +15,17 @@ const createGridCell = (parent: Element) => {
 
 export const generateGame = ({ field, gridContainer, tileContainer, matrix }: IgenerateField) => {
     generateGridField(matrix, gridContainer);
-    field.map((innerText : number, index : number) => generateTileField(tileContainer, innerText.toString(), String(index)));
+    field.map((innerText : number) => generateTileField(tileContainer, String(innerText)));
 }
 
 const generateGridField = (matrix: number[][], parent: Element) => {
     return matrix.map((gridRow: number[]) => createGridRow(gridRow, parent));
 }
 
-const generateTileField = (parent: Element, innerText: string, index: string) => {
+const generateTileField = (parent: Element, innerText: string) => {
     const tile = document.createElement('div');
     tile.className = 'tile';
-    tile.dataset.matrixId = index;
+    tile.dataset.matrixId = innerText;
     tile.innerText = innerText;
     if (innerText === '0') {
         tile.style.opacity = '0';
