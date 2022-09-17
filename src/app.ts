@@ -1,10 +1,8 @@
 import './style/game.css'
-import {field, fieldSize, matrix, size} from './store'
-import {setNodeStyles, setPositionItems} from './position';
+import {field, matrix, size} from './store'
+import {setPositionItems} from './position';
 import {generateGame} from './DOM';
-import {IMatrix} from './types/initial';
-import {log} from "util";
-import {start} from "repl";
+import {IMatrix, IPosTile} from './types/initial';
 
 const tileContainer: Element = document.querySelector('.tiles')!
 const gridContainer: Element = document.querySelector('.grid')!
@@ -23,10 +21,10 @@ tileContainer.addEventListener('click', (event: any) => {
     const tile = target.closest('.tile') as HTMLElement
     if (!tile) return;
     const tileNumber = Number(tile.dataset.matrixId)
-    const tileCoords = findCoordByNumber(tileNumber, matrix)
-    const blankCoords = findCoordByNumber(blackNumber, matrix)
+    const tileCoords: IPosTile | undefined = findCoordByNumber(tileNumber, matrix)
+    const blankCoords: IPosTile | undefined = findCoordByNumber(blackNumber, matrix)
     const isValid = isValidForSwap(tileCoords, blankCoords)
-    if (isValid) {
+    if (isValid && blankCoords && tileCoords) {
         if (isValid === 'short-swap') {
             swap(blankCoords, tileCoords, matrix)
             setPositionItems(matrix, tileArray)
@@ -38,19 +36,18 @@ tileContainer.addEventListener('click', (event: any) => {
     }
 })
 
-function findCoordByNumber(num: number, matrix: number[][]) {
-    for( let y = 0; y < matrix.length; y++) {
-        for( let x = 0; x < matrix.length; x++) {
+function findCoordByNumber(num: number, matrix: number[][]): IPosTile | undefined {
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix.length; x++) {
             if (matrix[y][x] === num) {
-                return { x, y };
+                return {x, y};
             }
         }
     }
-    return null;
+    return undefined;
 }
 
 function isValidForSwap(coords1: any, coords2: any) {
-    // console.log(coords1, coords2);
     const diffX = Math.abs(coords1.x - coords2.x)
     const diffY = Math.abs(coords1.y - coords2.y)
 
@@ -69,36 +66,75 @@ function swap(coords1: any, coords2: any, matrix: IMatrix) {
     matrix[coords2.y][coords2.x] = coords1Number;
 }
 
-function longSwap(coords1: any, coords2: any, matrix: any) {
+function longSwap(coords1: IPosTile, coords2: IPosTile, matrix: IMatrix) {
     const coords1Number = matrix[coords1.y][coords1.x];
-    console.log(coords2)
-    for( let y = 0; y < matrix.length; y++) {
-        if (y === coords2.y) {
-            let startRow = matrix[y].slice(0, coords2.x);
-            let endRow = matrix[y].slice(coords2.x, size)
-            const blank = matrix[y].slice(coords1.x)
-            const currentSize = endRow.length - 1
+    const swapRight = (row: number[], targetTile: number, zeroTile: number): number[] => {
+        const blank = row.slice(coords1.x);
+        const currentSize = row.length - 1;
+        if ((targetTile === 0) && (zeroTile === currentSize)) {
+            const startRow = row.slice(0, size);
+            return firstZeroConcat(startRow, blank, currentSize)
+        }
+        if ((targetTile === 0) && (zeroTile !== currentSize)) {
+            const startRow: any = row.slice(0, zeroTile)
+            startRow.unshift(0)
+            const endRow: any = row.slice(zeroTile + 1, size)
+            return [].concat(startRow, endRow)
+        } else {
+            const startRow: any = row.slice(0, targetTile)
+            const endRow: any = row.slice(targetTile, size).filter((tile: number) => tile !== 0)
+            endRow.unshift(0)
+            return [].concat(startRow, endRow)
+        }
+    }
+    const swapLeft = (row: number[], targetTile: number, zeroTile: number) => {
+        const blank = row.slice(coords1.x);
+        const currentSize = row.length - 1;
+        if ((targetTile === currentSize) && (zeroTile === 0)) {
+            console.log(1)
+            const newRow = row.filter((tile: number) => tile !== 0);
+            newRow.push(0)
+            return newRow
+        }
+        if ((zeroTile !== 0) && (targetTile === currentSize)) {
+            console.log(2);
+            const startRow: any = row.slice(0, zeroTile)
+            const endRow: any = row.slice(zeroTile + 1, size)
+            endRow.push(0)
+            return [].concat(startRow, endRow)
+        }
+        if ((zeroTile !== 0) && (targetTile !== currentSize)) {
+            console.log(3);
+            const startRow: any = row.slice(0, targetTile + 1).filter((tile: number) => tile !== 0)
+            const endRow: any = row.slice(targetTile + 1 , size)
+            startRow.push(0)
+            console.log(startRow, endRow)
+            return [].concat(startRow, endRow)
+        }
+        else {
+            console.log(4)
+            const startRow: any = row.slice(1, targetTile + 1);
+            const endRow: any = row.slice(targetTile + 1, size);
+            startRow.push(0)
+            return [].concat(startRow, endRow)
 
-            if (coords2.x === 0 && (coords1.x === currentSize)) {
-                startRow = matrix[y].slice(0, size);
-                matrix[y] = longSwapRight(startRow, blank, currentSize)
-                console.log(coords1.x, currentSize)
-            } if (coords2.x === 0 && (coords1.x !== currentSize)) {
-                startRow = matrix[y].slice(0, coords1.x)
-                startRow.unshift(0)
-                endRow = matrix[y].slice(coords1.x + 1, size)
-                matrix[y] = [].concat(startRow, endRow)
+        }
+    }
+    for (let y = 0; y < matrix.length; y++) {
+        if (y === coords2.y) {
+            const targetTile = coords2.x;
+            const zeroTile = coords1.x;
+
+            if (zeroTile > targetTile) {
+                return matrix[y] = swapRight(matrix[y], targetTile, zeroTile)
             }
-            else {
-                const currentEndRow = longSwapRight(endRow, blank, currentSize)
-                console.log(currentEndRow)
-                matrix[y] = currentEndRow
-                console.log('else')
+            if (zeroTile < targetTile) {
+                return matrix[y] = swapLeft(matrix[y], targetTile, zeroTile)
             }
         }
     }
 }
 
-function longSwapRight(row: any, blank: any, end: number) {
+function firstZeroConcat(row: any, blank: any, end: number) {
     return [].concat(blank, row.slice(0, end))
 }

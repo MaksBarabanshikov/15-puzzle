@@ -10,7 +10,7 @@ interface IFifteen {
     matrix: IMatrix
 }
 
-const _size = sizeStorage ? Number(sizeStorage) : 5;
+const _size = sizeStorage ? Number(sizeStorage) : 8;
 const _fieldSize = Math.pow(_size, 2);
 const _initialField = [...Array(_fieldSize - 1).keys()].map(x => ++x);
 const _field = [..._initialField].sort(() => Math.random() - .5).concat(0);
