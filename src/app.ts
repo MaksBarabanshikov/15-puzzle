@@ -3,6 +3,7 @@ import {field, matrix, size} from './store'
 import {setPositionItems} from './position';
 import {generateGame} from './DOM';
 import {IMatrix, IPosTile} from './types/initial';
+import {log} from 'util';
 
 const tileContainer: Element = document.querySelector('.tiles')!
 const gridContainer: Element = document.querySelector('.grid')!
@@ -67,7 +68,7 @@ function swap(coords1: any, coords2: any, matrix: IMatrix) {
 }
 
 function longSwap(coords1: IPosTile, coords2: IPosTile, matrix: IMatrix) {
-    const coords1Number = matrix[coords1.y][coords1.x];
+    let tempTile
     const swapRight = (row: number[], targetTile: number, zeroTile: number): number[] => {
         const blank = row.slice(coords1.x);
         const currentSize = row.length - 1;
@@ -87,38 +88,36 @@ function longSwap(coords1: IPosTile, coords2: IPosTile, matrix: IMatrix) {
             return [].concat(startRow, endRow)
         }
     }
-    const swapLeft = (row: number[], targetTile: number, zeroTile: number) => {
-        const blank = row.slice(coords1.x);
+    const swapLeft = (row: number[], targetTile: number, zeroTile: number): number[] => {
         const currentSize = row.length - 1;
         if ((targetTile === currentSize) && (zeroTile === 0)) {
-            console.log(1)
             const newRow = row.filter((tile: number) => tile !== 0);
             newRow.push(0)
             return newRow
         }
         if ((zeroTile !== 0) && (targetTile === currentSize)) {
-            console.log(2);
             const startRow: any = row.slice(0, zeroTile)
             const endRow: any = row.slice(zeroTile + 1, size)
             endRow.push(0)
             return [].concat(startRow, endRow)
         }
         if ((zeroTile !== 0) && (targetTile !== currentSize)) {
-            console.log(3);
             const startRow: any = row.slice(0, targetTile + 1).filter((tile: number) => tile !== 0)
             const endRow: any = row.slice(targetTile + 1 , size)
             startRow.push(0)
-            console.log(startRow, endRow)
             return [].concat(startRow, endRow)
         }
         else {
-            console.log(4)
             const startRow: any = row.slice(1, targetTile + 1);
             const endRow: any = row.slice(targetTile + 1, size);
             startRow.push(0)
             return [].concat(startRow, endRow)
 
         }
+    }
+    const swapBottom = (matrix: any,targetTile: number, zeroTile: number) => {
+        console.log(targetTile, zeroTile)
+        console.log(matrix)
     }
     for (let y = 0; y < matrix.length; y++) {
         if (y === coords2.y) {
@@ -130,6 +129,18 @@ function longSwap(coords1: IPosTile, coords2: IPosTile, matrix: IMatrix) {
             }
             if (zeroTile < targetTile) {
                 return matrix[y] = swapLeft(matrix[y], targetTile, zeroTile)
+            }
+        }
+        // tslint:disable-next-line:prefer-for-of
+        for (let x = 0; x < matrix.length; x++) {
+            if (x === coords1.x) {
+                tempTile = matrix[y][x];
+                if (matrix[y + 1]) {
+                    matrix[y + 1][x] = tempTile //TODO надо переделать, переписывает следующие элементы
+                }
+                const targetTile = coords2.x;
+                const zeroTile = coords1.x;
+                console.log(matrix[y][x])
             }
         }
     }
