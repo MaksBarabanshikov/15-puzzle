@@ -2,11 +2,13 @@ export type ISize = number;
 
 export type IField = number[];
 
-export type IMatrix = number[][];
+export type IMatrix = Coordinate[][];
 
 export type IFieldSize = number;
 
 export interface IPosTile {
-    x: number;
-    y: number;
+    x: Coordinate;
+    y: Coordinate;
 }
+
+export type Coordinate = number;

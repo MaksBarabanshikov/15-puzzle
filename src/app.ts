@@ -2,7 +2,7 @@ import './style/game.css'
 import {field, matrix, size} from './store'
 import {setPositionItems} from './position';
 import {generateGame} from './DOM';
-import {IMatrix, IPosTile} from './types/initial';
+import {IMatrix, IPosTile, ISize} from './types/initial';
 import {log} from 'util';
 
 const tileContainer: Element = document.querySelector('.tiles')!
@@ -67,10 +67,9 @@ function swap(coords1: any, coords2: any, matrix: IMatrix) {
     matrix[coords2.y][coords2.x] = coords1Number;
 }
 
-function longSwap(coords1: IPosTile, coords2: IPosTile, matrix: IMatrix) {
-    let tempTile
+function longSwap(blackCoords: IPosTile, targetCoords: IPosTile, matrix: IMatrix) {
     const swapRight = (row: number[], targetTile: number, zeroTile: number): number[] => {
-        const blank = row.slice(coords1.x);
+        const blank = row.slice(blackCoords.x);
         const currentSize = row.length - 1;
         if ((targetTile === 0) && (zeroTile === currentSize)) {
             const startRow = row.slice(0, size);
@@ -120,28 +119,50 @@ function longSwap(coords1: IPosTile, coords2: IPosTile, matrix: IMatrix) {
         console.log(matrix)
     }
     for (let y = 0; y < matrix.length; y++) {
-        if (y === coords2.y) {
-            const targetTile = coords2.x;
-            const zeroTile = coords1.x;
-
-            if (zeroTile > targetTile) {
-                return matrix[y] = swapRight(matrix[y], targetTile, zeroTile)
-            }
-            if (zeroTile < targetTile) {
-                return matrix[y] = swapLeft(matrix[y], targetTile, zeroTile)
-            }
-        }
-        // tslint:disable-next-line:prefer-for-of
         for (let x = 0; x < matrix.length; x++) {
-            if (x === coords1.x) {
-                tempTile = matrix[y][x];
-                if (matrix[y + 1]) {
-                    matrix[y + 1][x] = tempTile //TODO надо переделать, переписывает следующие элементы
+            const targetTile = targetCoords.x;
+            const zeroTile = blackCoords.x;
+            if (y === targetCoords.y) {
+                if (zeroTile > targetTile) {
+                    return matrix[y] = swapRight(matrix[y], targetTile, zeroTile)
                 }
-                const targetTile = coords2.x;
-                const zeroTile = coords1.x;
-                console.log(matrix[y][x])
+                if (zeroTile < targetTile) {
+                    return matrix[y] = swapLeft(matrix[y], targetTile, zeroTile)
+                }
+
+                if (x === zeroTile) {
+                    const blankCoords: IPosTile = findCoordByNumber(blackNumber, matrix)!
+                    let counterY: ISize = blankCoords.y
+
+                    if (blankCoords.y > targetCoords.y) {
+                        while (counterY !== 0) {
+                            const blankCoords: IPosTile = findCoordByNumber(blackNumber, matrix)!
+                            const tile = matrix[counterY][x];
+                            const nextTile = matrix[counterY - 1][x]
+                            if (blankCoords.y > targetCoords.y) {
+                                matrix[counterY - 1][x] = tile
+                                matrix[counterY][x] = nextTile
+                            }
+                            --counterY
+                        }
+                    }
+
+                    if (blankCoords.y <= targetCoords.y) {
+                        const blankCoords: IPosTile = findCoordByNumber(blackNumber, matrix)!
+                        let counterY = blankCoords.y
+                        console.log(counterY, )
+                        while (counterY !== targetCoords.y) {
+                            const tile = matrix[counterY][x];
+                            const nextTile = matrix[counterY + 1][x]
+                            matrix[counterY + 1][x] = tile
+                            matrix[counterY][x] = nextTile
+                            ++counterY
+                        }
+                    }
+                    console.log(matrix)
+                }
             }
+
         }
     }
 }
