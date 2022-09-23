@@ -24,6 +24,11 @@ $max_grid_size: 8;
   //padding: 7px;
 }
 
+.game__select {
+  position: absolute;
+  top: 10px;
+}
+
 .game__message {
   display: none;
 }
