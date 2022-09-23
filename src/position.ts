@@ -1,5 +1,5 @@
 import { checkWin } from './helper';
-import { winMatrix } from './store';
+import { fifteen } from './store';
 
 export const setPositionItems = (matrix: any, arr: HTMLElement[]) => {
   for( let y = 0; y < matrix.length; y++) {
@@ -10,7 +10,7 @@ export const setPositionItems = (matrix: any, arr: HTMLElement[]) => {
       setNodeStyles(node, x + 1, y + 1);
     }
   }
-  setTimeout(() => checkWin(matrix, winMatrix), 500)
+  setTimeout(() => checkWin(matrix, fifteen.winMatrix), 500)
 }
 
 export const setNodeStyles = (node: HTMLElement, x: number, y: number) => {

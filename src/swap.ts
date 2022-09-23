@@ -1,5 +1,5 @@
 import { IMatrix, IPosTile } from './types/initial';
-import { blankTile, size } from './store';
+import { fifteen } from './store';
 import { findCoordByNumber, firstZeroConcat } from './helper';
 
 export const swap = (coords1: any, coords2: any, matrix: IMatrix) => {
@@ -12,17 +12,17 @@ const swapRight = (row: number[], targetTile: number, zeroTile: number, blackCoo
     const blank = row.slice(blackCoords.x);
     const currentSize = row.length - 1;
     if ((targetTile === 0) && (zeroTile === currentSize)) {
-        const startRow = row.slice(0, size);
+        const startRow = row.slice(0, fifteen.size);
         return firstZeroConcat(startRow, blank, currentSize)
     }
     if ((targetTile === 0) && (zeroTile !== currentSize)) {
         const startRow: any = row.slice(0, zeroTile)
         startRow.unshift(0)
-        const endRow: any = row.slice(zeroTile + 1, size)
+        const endRow: any = row.slice(zeroTile + 1, fifteen.size)
         return [].concat(startRow, endRow)
     } else {
         const startRow: any = row.slice(0, targetTile)
-        const endRow: any = row.slice(targetTile, size).filter((tile: number) => tile !== 0)
+        const endRow: any = row.slice(targetTile, fifteen.size).filter((tile: number) => tile !== 0)
         endRow.unshift(0)
         return [].concat(startRow, endRow)
     }
@@ -37,30 +37,29 @@ const swapLeft = (row: number[], targetTile: number, zeroTile: number): number[]
     }
     if ((zeroTile !== 0) && (targetTile === currentSize)) {
         const startRow: any = row.slice(0, zeroTile)
-        const endRow: any = row.slice(zeroTile + 1, size)
+        const endRow: any = row.slice(zeroTile + 1, fifteen.size)
         endRow.push(0)
         return [].concat(startRow, endRow)
     }
     if ((zeroTile !== 0) && (targetTile !== currentSize)) {
         const startRow: any = row.slice(0, targetTile + 1).filter((tile: number) => tile !== 0)
-        const endRow: any = row.slice(targetTile + 1 , size)
+        const endRow: any = row.slice(targetTile + 1 , fifteen.size)
         startRow.push(0)
         return [].concat(startRow, endRow)
     }
     else {
         const startRow: any = row.slice(1, targetTile + 1);
-        const endRow: any = row.slice(targetTile + 1, size);
+        const endRow: any = row.slice(targetTile + 1, fifteen.size);
         startRow.push(0)
         return [].concat(startRow, endRow)
-
     }
 }
 
 const swapBottom = (matrix: IMatrix, targetCoords: IPosTile, x: number) => {
-    const blankCoords: IPosTile = findCoordByNumber(blankTile, matrix)!
+    const blankCoords: IPosTile = findCoordByNumber(fifteen.blankTile, matrix)!
     let counterY = blankCoords.y
     while (counterY !== 0) {
-        const blankCoords: IPosTile = findCoordByNumber(blankTile, matrix)!
+        const blankCoords: IPosTile = findCoordByNumber(fifteen.blankTile, matrix)!
         const tile = matrix[counterY][x];
         const nextTile = matrix[counterY - 1][x]
         if (blankCoords.y > targetCoords.y) {
@@ -72,7 +71,7 @@ const swapBottom = (matrix: IMatrix, targetCoords: IPosTile, x: number) => {
 }
 
 const swapTop = (matrix: IMatrix, targetCoords: IPosTile, x: number) => {
-    const blankCoords: IPosTile = findCoordByNumber(blankTile, matrix)!
+    const blankCoords: IPosTile = findCoordByNumber(fifteen.blankTile, matrix)!
     let counterY = blankCoords.y
     while (counterY !== targetCoords.y) {
         const tile = matrix[counterY][x];
@@ -104,7 +103,7 @@ export const longSwap = (blankCoords: IPosTile, targetCoords: IPosTile, matrix: 
                     }
                 }
             }
-
         }
     }
+
 }

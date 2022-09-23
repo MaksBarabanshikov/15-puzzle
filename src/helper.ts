@@ -20,7 +20,6 @@ export const findCoordByNumber = (num: number, matrix: IMatrix) => {
 export const isValidForSwap = (coords1: IPosTile, coords2: IPosTile) => {
     const diffX = Math.abs(coords1.x - coords2.x)
     const diffY = Math.abs(coords1.y - coords2.y)
-
     if ((diffX === 1 || diffY === 1) && (coords1.x === coords2.x || coords1.y === coords2.y)) {
         return 'short-swap'
     }

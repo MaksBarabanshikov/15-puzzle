@@ -1,40 +1,42 @@
 import {IPosTile} from './types/initial';
-import {blankTile, matrix, winMatrix} from './store';
+import {fifteen}  from './store';
 import {setPositionItems} from './position';
-import {checkWin, findCoordByNumber, isValidForSwap} from './helper';
+import { findCoordByNumber, isValidForSwap } from './helper';
 import {longSwap, swap} from './swap';
 
-export const handleClick = (tileArray: HTMLElement[]) => (event: any) => {
+export const handleClick = (event: any) => {
     const target = event.target as HTMLElement
     const tile = target.closest('.tile') as HTMLElement
+    const tileArray: HTMLElement[] = Array.from(document!.querySelectorAll('.tile'))
     if (!tile) return;
     const tileNumber = Number(tile.dataset.matrixId)
-    const tileCoords: IPosTile = findCoordByNumber(tileNumber, matrix)!
-    const blankCoords: IPosTile = findCoordByNumber(blankTile, matrix)!
+    const tileCoords: IPosTile = findCoordByNumber(tileNumber, fifteen.matrix)!
+    const blankCoords: IPosTile = findCoordByNumber(fifteen.blankTile, fifteen.matrix)!
     const isValid = isValidForSwap(tileCoords, blankCoords)
+    console.log(isValid)
     if (isValid) {
         if (isValid === 'short-swap') {
-            swap(blankCoords, tileCoords, matrix)
-            setPositionItems(matrix, tileArray)
+            swap(blankCoords, tileCoords, fifteen.matrix)
+            setPositionItems(fifteen.matrix, tileArray)
         }
         if (isValid === 'long-swap') {
-            longSwap(blankCoords, tileCoords, matrix)
-            setPositionItems(matrix, tileArray)
+            longSwap(blankCoords, tileCoords, fifteen.matrix)
+            setPositionItems(fifteen.matrix, tileArray)
         }
     }
 }
 
-export const handleKey = (tileArray: HTMLElement[]) =>  (event: any) => {
+export const handleKey = (event: any) => {
     if (!event.key.includes('Arrow')) return;
 
-    const blankCoords: IPosTile = findCoordByNumber(blankTile, matrix)!
+    const blankCoords: IPosTile = findCoordByNumber(fifteen.blankTile, fifteen.matrix)!
     const tileCoords: IPosTile = {
         x: blankCoords.x,
         y: blankCoords.y
     }
-
+    const tileArray: HTMLElement[] = Array.from(document!.querySelectorAll('.tile'))
     const direction = event.key.split('Arrow')[1].toLowerCase()
-    const maxIndexArray = matrix.length
+    const maxIndexArray = fifteen.matrix.length
     switch (direction) {
         case 'up':
             tileCoords.y += 1;
@@ -55,6 +57,6 @@ export const handleKey = (tileArray: HTMLElement[]) =>  (event: any) => {
         return;
     }
 
-    swap(blankCoords, tileCoords, matrix)
-    setPositionItems(matrix, tileArray)
+    swap(blankCoords, tileCoords, fifteen.matrix)
+    setPositionItems(fifteen.matrix, tileArray)
 }
