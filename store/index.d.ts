@@ -1,2 +1,3 @@
-import { IField, IMatrix } from '../types/initial';
-export declare const size: number, initialField: IField, field: IField, matrix: IMatrix, fieldSize: number;
+import { IFifteen } from '../types/initial';
+export declare const selector: HTMLSelectElement;
+export declare let fifteen: IFifteen;
