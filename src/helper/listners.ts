@@ -1,8 +1,9 @@
-import {IPosTile} from './types/initial';
-import {fifteen}  from './store';
+import {IPosTile} from '../types/initial';
+import {fifteen}  from '../store';
 import {setPositionItems} from './position';
 import { findCoordByNumber, isValidForSwap } from './helper';
 import {longSwap, swap} from './swap';
+import {updateLocalStorage} from './localStorage';
 
 export const handleClick = (event: any) => {
     const target = event.target as HTMLElement
@@ -23,6 +24,7 @@ export const handleClick = (event: any) => {
             longSwap(blankCoords, tileCoords, fifteen.matrix)
             setPositionItems(fifteen.matrix, tileArray)
         }
+        updateLocalStorage(fifteen)
     }
 }
 

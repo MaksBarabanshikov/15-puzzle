@@ -1,4 +1,4 @@
-import { IgenerateField } from './types/IProps';
+import { IgenerateField } from '../types/IProps';
 
 const createGridRow = (gridRow: number[], parent: Element) => {
     const gridRowDOM: HTMLElement = document.createElement('div');

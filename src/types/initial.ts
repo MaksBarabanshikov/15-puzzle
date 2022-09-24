@@ -12,3 +12,13 @@ export interface IPosTile {
 }
 
 export type Coordinate = number;
+
+export interface IFifteen {
+    size: ISize,
+    fieldSize: IFieldSize,
+    initialField: IField,
+    field: IField,
+    matrix: IMatrix,
+    winMatrix: IMatrix,
+    blankTile: number,
+}

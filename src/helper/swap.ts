@@ -1,5 +1,5 @@
-import { IMatrix, IPosTile } from './types/initial';
-import { fifteen } from './store';
+import { IMatrix, IPosTile } from '../types/initial';
+import { fifteen } from '../store';
 import { findCoordByNumber, firstZeroConcat } from './helper';
 
 export const swap = (coords1: any, coords2: any, matrix: IMatrix) => {

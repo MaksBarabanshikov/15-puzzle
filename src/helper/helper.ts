@@ -1,4 +1,5 @@
-import {IMatrix, IPosTile} from './types/initial';
+import {log} from 'console';
+import {IMatrix, IPosTile} from '../types/initial';
 
 export const getMatrix = (arr: number[], size: number) => {
     const matrix: any[] = []
