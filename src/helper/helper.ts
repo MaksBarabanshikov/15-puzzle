@@ -1,8 +1,6 @@
-import {log} from 'console';
 import {IField, IMatrix, IPosTile} from '../types/initial';
-import {fifteen} from "../store";
-import {fifteenCounter} from "./DOM";
-import {updateLocalCounter} from "./localStorage";
+import {fifteenCounter} from './DOM';
+import {updateLocalCounter} from './localStorage';
 
 export const getMatrix = (arr: number[], size: number) => {
     const matrix: any[] = []
