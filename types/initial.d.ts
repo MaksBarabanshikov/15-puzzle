@@ -7,6 +7,7 @@ export interface IPosTile {
     y: Coordinate;
 }
 export declare type Coordinate = number;
+export declare type Counter = number;
 export interface IFifteen {
     size: ISize;
     fieldSize: IFieldSize;
