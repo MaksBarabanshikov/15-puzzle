@@ -1,7 +1,7 @@
 import {IField, IMatrix} from './types/initial';
 import {setPositionItems} from './helper/position';
 import {handleClick, handleKey} from './helper/listners';
-import {generateGame} from './helper/DOM';
+import {generateGame, initCounter} from './helper/DOM';
 
 export const initFifteen = (field: IField, matrix: IMatrix) => {
     const tileContainer: HTMLElement = document.querySelector('.tiles')!
@@ -15,4 +15,5 @@ export const initFifteen = (field: IField, matrix: IMatrix) => {
     setPositionItems(matrix, tileArray);
     tileContainer.addEventListener('click', handleClick)
     window.addEventListener('keydown', handleKey)
+    initCounter()
 }

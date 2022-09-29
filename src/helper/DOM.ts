@@ -1,4 +1,6 @@
 import { IgenerateField } from '../types/IProps';
+import {fifteen} from "../store";
+import {counterStorage, fifteenStorage, updateLocalCounter} from "./localStorage";
 
 const createGridRow = (gridRow: number[], parent: Element) => {
     const gridRowDOM: HTMLElement = document.createElement('div');
@@ -31,4 +33,19 @@ const generateTileField = (parent: Element, innerText: string) => {
         tile.style.opacity = '0';
     }
     parent.appendChild(tile);
+}
+
+export const fifteenCounter = document.querySelector('#fifteenCounter')!
+
+export const initCounter = () => {
+    console.log(123)
+    if (counterStorage()) {
+      return fifteenCounter.innerHTML = counterStorage()
+    }
+    return updateLocalCounter(0)
+}
+
+export const resetCounter = () => {
+    fifteenCounter.innerHTML = '0'
+    updateLocalCounter(0)
 }

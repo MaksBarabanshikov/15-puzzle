@@ -1,9 +1,10 @@
 import {IPosTile} from '../types/initial';
 import {fifteen}  from '../store';
 import {setPositionItems} from './position';
-import { findCoordByNumber, isValidForSwap } from './helper';
+import {findCoordByNumber, incrementCounter, isValidForSwap} from './helper';
 import {longSwap, swap} from './swap';
 import {updateLocalStorage} from './localStorage';
+import {resetCounter} from "./DOM";
 
 export const handleClick = (event: any) => {
     const target = event.target as HTMLElement
@@ -14,7 +15,6 @@ export const handleClick = (event: any) => {
     const tileCoords: IPosTile = findCoordByNumber(tileNumber, fifteen.matrix)!
     const blankCoords: IPosTile = findCoordByNumber(fifteen.blankTile, fifteen.matrix)!
     const isValid = isValidForSwap(tileCoords, blankCoords)
-    console.log(isValid)
     if (isValid) {
         if (isValid === 'short-swap') {
             swap(blankCoords, tileCoords, fifteen.matrix)
@@ -24,6 +24,7 @@ export const handleClick = (event: any) => {
             longSwap(blankCoords, tileCoords, fifteen.matrix)
             setPositionItems(fifteen.matrix, tileArray)
         }
+        incrementCounter()
         updateLocalStorage(fifteen)
     }
 }

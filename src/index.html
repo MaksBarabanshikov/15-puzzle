@@ -9,6 +9,10 @@
 </head>
 <body>
 <div class="game__container">
+    <div class="game__counter">
+        <span>Ходов: </span>
+        <span id="fifteenCounter">0</span>
+    </div>
     <select class="game__select">
         <option value="3" selected>3x3</option>
         <option value="4">4x4</option>
@@ -19,6 +23,11 @@
     <div class="game__main">
         <div class="game__grid grid" id="15-puzzle"></div>
         <div class="tiles tiles-size-4"></div>
+    </div>
+    <div class="game__btn">
+        <a href="#" id="newGameFifteen">
+            Новая игра
+        </a>
     </div>
 </div>
 </body>

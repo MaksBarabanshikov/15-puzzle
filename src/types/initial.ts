@@ -13,6 +13,8 @@ export interface IPosTile {
 
 export type Coordinate = number;
 
+export type Counter = number
+
 export interface IFifteen {
     size: ISize,
     fieldSize: IFieldSize,
