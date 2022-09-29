@@ -4,7 +4,6 @@ import {setPositionItems} from './position';
 import {findCoordByNumber, incrementCounter, isValidForSwap} from './helper';
 import {longSwap, swap} from './swap';
 import {updateLocalStorage} from './localStorage';
-import {resetCounter} from "./DOM";
 
 export const handleClick = (event: any) => {
     const target = event.target as HTMLElement
