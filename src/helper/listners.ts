@@ -4,6 +4,7 @@ import {setPositionItems} from './position';
 import {findCoordByNumber, incrementCounter, isValidForSwap} from './helper';
 import {longSwap, swap} from './swap';
 import {updateLocalStorage} from './localStorage';
+import {currentPlayAudio, currentTileAudio, swapAudio} from './audio';
 
 export const handleClick = (event: any) => {
     const target = event.target as HTMLElement
@@ -15,6 +16,8 @@ export const handleClick = (event: any) => {
     const blankCoords: IPosTile = findCoordByNumber(fifteen.blankTile, fifteen.matrix)!
     const isValid = isValidForSwap(tileCoords, blankCoords)
     if (isValid) {
+        const currentTilesOld = Array.from(document.querySelectorAll('.tile_correct'))
+        console.log(tileArray);
         if (isValid === 'short-swap') {
             swap(blankCoords, tileCoords, fifteen.matrix)
             setPositionItems(fifteen.matrix, tileArray)
@@ -23,6 +26,9 @@ export const handleClick = (event: any) => {
             longSwap(blankCoords, tileCoords, fifteen.matrix)
             setPositionItems(fifteen.matrix, tileArray)
         }
+        swapAudio()
+        const currentTilesNew = Array.from(document.querySelectorAll('.tile_correct'))
+        currentPlayAudio(currentTilesOld, currentTilesNew)
         incrementCounter()
         updateLocalStorage(fifteen)
     }

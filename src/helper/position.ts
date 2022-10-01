@@ -1,6 +1,7 @@
 import { checkWin } from './helper';
 import { fifteen } from '../store';
 import {IMatrix} from '../types/initial';
+import {currentTileAudio} from './audio';
 
 export const setPositionItems = (matrix: any, arr: HTMLElement[]) => {
   for( let y = 0; y < matrix.length; y++) {
@@ -11,7 +12,7 @@ export const setPositionItems = (matrix: any, arr: HTMLElement[]) => {
       setNodeStyles(node, x + 1, y + 1);
     }
   }
-  checkCurrentTile(matrix, fifteen.winMatrix).forEach((currentValue: number) => addCurrentTileClass(currentValue) )
+  checkCurrentTile(matrix, fifteen.winMatrix).forEach((currentValue: number) => addCurrentTileClass(currentValue))
   setTimeout(() => checkWin(matrix, fifteen.winMatrix), 500)
 }
 
@@ -23,6 +24,7 @@ const setNodeStyles = (node: HTMLElement, x: number, y: number) => {
 const checkCurrentTile = (matrix: IMatrix, matrixWin: IMatrix): number[] => {
   const currentField = [...matrix].flat()
   const currentWinField = [...matrixWin].flat()
+
   const currentValue = []
   for (let i = 0; i < currentField.length; i++) {
     if (currentField[i] === currentWinField[i]) {
@@ -35,7 +37,8 @@ const checkCurrentTile = (matrix: IMatrix, matrixWin: IMatrix): number[] => {
 const addCurrentTileClass = (currentTile: number) => {
   const tiles: any = document.querySelectorAll('.tile')!
   tiles.forEach((tile: HTMLElement) => {
-    if (Number(tile.dataset.matrixId) === currentTile) {
+    const matrixId = Number(tile.dataset.matrixId)
+    if (matrixId === currentTile && matrixId !== 0) {
       tile.classList.add('tile_correct')
     }
   })

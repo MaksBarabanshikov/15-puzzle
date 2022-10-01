@@ -2,6 +2,7 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: './src/app.ts',
@@ -40,10 +41,13 @@ module.exports = {
         ],
       },
       // {
-      //   test: /\.(svg|woff|woff2|ttf|eot|otf)([\?]?.*)$/,
+      //   test: /\.(mp3)$/,
       //   use: [
       //     {
-      //       loader: 'file-loader?name=assets/fonts/[name].[ext]',
+      //       loader: 'file-loader',
+      //       options: {
+      //         outputPath: 'assets/audio'
+      //       }
       //     },
       //   ],
       // },
@@ -64,5 +68,13 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'style-[hash].css',
     }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/assets/'),
+          to: path.resolve(__dirname, 'dist')
+        }
+      ]
+    })
   ],
 };
